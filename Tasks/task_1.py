@@ -1,22 +1,45 @@
 import os
 
-import pandas as pd
 from dotenv import load_dotenv
+import pandas as pd
 
 
-# Загружаем DATA_URL из .env файла
+# Читаем DATA_URL из .env файла
 load_dotenv()
 
 
-def safe_read_csv():
+# Так как Boston датасет не содрежит имён колонок,
+# вот один из варинатов наименования.
+COL_NAMES = [
+    "Potato",
+    "Tomato",
+    "Cabbage",
+    "Apple",
+    "Grape",
+    "Orange",
+    "Banana",
+    "Watermelon",
+    "Carrot",
+    "Onion",
+    "Strawberry"
+]
+
+
+def safe_read_csv() -> pd.DataFrame | None:
     """
-    This function reads dataframe from DATA_URL environment variable and returns None if some troubles appear
+    This function reads dataframe from DATA_URL environment variable.\n
+    It returns pd.DataFrame if there are no troubles and it returns None if there are.
     """
+    url = os.getenv("DATA_URL")
+    if url is None or url == "":
+        print("Переменная окружения DATA_URL не определена или содержит пустую строку")
+        return None
+
     try:
-        # Удалить первые 22 строки предалагет сам sklearn при попытке
-        # Скачать датасет через него. Видимо, эти первые строки отличаются от строк дальше
-        # Из-за чего просиходит ошибка чтения
-        df = pd.read_csv(os.getenv("DATA_URL"), sep="\s+", skiprows=22, header=None)
+        # Параметры этого метода, в частности, skiprows=22,
+        # были взяты из рекомендации от sklearn по установке датасета Boston.
+        # То есть, эти параметры подобраны исключительно под Boston датасет.
+        df = pd.read_csv(url, sep="\s+", skiprows=22, header=None, names=COL_NAMES)
         if df.empty:
             print("Файл пустой или не содержит данных")
         return df
@@ -33,10 +56,11 @@ def safe_read_csv():
 
 def main():
     raw_df = safe_read_csv()
-    df = raw_df.dropna()
-    df_vars = df.var()
-    df_sorted = df_vars.sort_values(ascending=False)
-    print(df_sorted[:3])
+    if raw_df is not None:
+        df = raw_df.dropna()
+        df_vars = df.var(numeric_only=True)
+        df_sorted = df_vars.sort_values(ascending=False)
+        print(df_sorted[:3])
 
 
 if __name__ == "__main__":
