@@ -4,7 +4,7 @@ This branch contains solutions of some basic tasks from the PLM course
 
 ## Task 1: Feature variance analysis
 
-In this task, I had to compute variance over each column in boston dataset using pandas.  
+In this task, I had to compute variance over each column in __Boston__ dataset using pandas.  
 And then print the three highest results.
 
 ### Run the program
