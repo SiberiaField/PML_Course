@@ -55,8 +55,7 @@ def parse_args():
 
 
 def main():
-    read_csv_kwargs = parse_args().read_csv_kwargs
-    raw_df = safe_read_csv(read_csv_kwargs)
+    raw_df = safe_read_csv(parse_args().read_csv_kwargs)
     if raw_df is not None:
         df = raw_df.dropna()
         df_vars = df.var(numeric_only=True)
