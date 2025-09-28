@@ -1,3 +1,3 @@
 # PML_Course
 
-This repo contains some tasks from the PML course. Change current branch to "tasks" if you want to look at tasks
+This repo contains some tasks from the PML course. Every task has its own folder, e.g. DA-1-31
