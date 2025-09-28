@@ -1,24 +1,20 @@
-# Tasks
-
-This branch contains solutions of some basic tasks from the PML course
-
-## Task 1: Feature variance analysis
+# DA-1-31: Feature variance analysis
 
 In this task, I had to compute variance over each column in a dataset using pandas.  
 And then print the three highest results.
 
-### Run the program
+## Run the program
 
 * __Use default parameters__
 
 ```bash
-python task_1.py
+python da_1_31.py
 ```
 
 * __Use custom parameters__
 
 ```bash
-python task_1.py --read_csv_kwargs '{"param_1": value_1, "param_2": value_2, "param_3": "str_1" ...}'
+python da_1_31.py --read_csv_kwargs '{"param_1": value_1, "param_2": value_2, "param_3": "str_1" ...}'
 ```
 
 __--read_csv_kwargs__ - parameters for pandas.read_csv function. This function is used for reading provided data.  
@@ -28,5 +24,5 @@ Indeed this string is just converted to the dict type via __json.loads__ functio
 * __Print help message__
 
 ```bash
-python task_1.py [-h, --help]
+python da_1_31.py [-h, --help]
 ```
